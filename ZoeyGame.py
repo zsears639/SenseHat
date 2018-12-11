@@ -76,8 +76,9 @@ while not game_over:
         if check_collision(matrix):
             game_over = True
         sleep(1)
-sense.show_message('You Lose')
-
-
+        while game_over:
+            sense.show_message('You lose')
+            sleep(1)
+            game_over = False
 
 
