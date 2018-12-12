@@ -9,6 +9,7 @@ Green = (0, 255, 0)
 
 x = 0
 y = 0
+points = 0
 
 game_over = False
 
@@ -61,7 +62,9 @@ def check_collision(matrix):
         return True
     else:
         return False
+    
 
+    
 
 sense.stick.direction_any = draw_astronaut
 
@@ -69,16 +72,20 @@ while not game_over:
     matrix = gen_pipes(matrix)
     if check_collision(matrix):
         game_over = True
+        
     for i in range(3):
         matrix = move_pipes(matrix)
         sense.set_pixels(flatten(matrix))
-        sense.set_pixel(x, y, Green)   
+        sense.set_pixel(x, y, Green)
+        points = points + 1
         if check_collision(matrix):
             game_over = True
         sleep(1)
         while game_over:
-            sense.show_message('You lose')
+            sense.show_message('You Lose')
+            sense.show_message('Points: ' + str(points))
             sleep(1)
+            points = 0
             game_over = False
 
 
