@@ -70,20 +70,27 @@ sense.stick.direction_any = draw_astronaut
 
 while not game_over:
     matrix = gen_pipes(matrix)
+    if check_collision(matrix) == False:
+        points = points + 1
+        if points == 15 + 1 :
+            sense.show_message('You Win', text_colour = Green)
+    
     if check_collision(matrix):
         game_over = True
         
-    for i in range(3):
+        
+    for i in range(2):
         matrix = move_pipes(matrix)
         sense.set_pixels(flatten(matrix))
         sense.set_pixel(x, y, Green)
-        points = points + 1
+        
         if check_collision(matrix):
             game_over = True
         sleep(1)
         while game_over:
-            sense.show_message('You Lose')
-            sense.show_message('Points: ' + str(points))
+            points = points - 1
+            sense.show_message('You Lose',text_colour = RED)
+            sense.show_message('Points: ' + str(points), text_colour = BLUE)
             sleep(1)
             points = 0
             game_over = False
