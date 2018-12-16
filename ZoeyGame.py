@@ -105,6 +105,5 @@ while not game_over:
               sense.show_message('Points: ' + str(points), text_colour = BLUE)
               sleep(1)
               points = 0
-              lives = 3
+              lives = 3 
               game_over = False
-              
